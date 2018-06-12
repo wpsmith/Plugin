@@ -104,7 +104,7 @@ if ( ! class_exists( 'ExtendPlugin' ) ) {
 		 * @param string|null $text_domain Text domain.
 		 * @param string|null $custom_plugins_folder Custom plugins folder that contains plugins (e.g., mu-plugins with plugins inside).
 		 */
-		public function __construct( $plugin, $root_file, $min_version = null, $text_domain = null, $custom_plugins_folder = WPMU_PLUGIN_DIR ) {
+		public function __construct( $plugin, $root_file, $min_version = null, $text_domain = null, $custom_plugins_folder = '' ) {
 			// Setup
 			$this->plugin      = $plugin;
 			$this->root_file   = $root_file;
