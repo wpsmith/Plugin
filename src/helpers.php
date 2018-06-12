@@ -13,10 +13,10 @@ namespace WPS\Plugins;
  * @param string $plugin Path to the main plugin file from plugins directory.
  * @return bool True, if in the active plugins list. False, not in the list.
  */
-function is_active( $plugin ) {
+function is_plugin_active( $plugin ) {
 	if ( ! function_exists( 'is_plugin_active' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	}
 
-	return is_plugin_active( $plugin );
+	return \is_plugin_active( $plugin );
 }
