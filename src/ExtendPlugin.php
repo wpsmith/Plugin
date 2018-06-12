@@ -28,7 +28,7 @@ if ( ! class_exists( 'ExtendPlugin' ) ) {
 	 * @package WPS\Core
 	 * @author Travis Smith <t@wpsmith.net>
 	 */
-	class ExtendPlugin extends Singleton {
+	class ExtendPlugin {
 
 		/**
 		 * Dependent plugin name, plugin relative path (e.g., 'addthis/addthis_social_widget.php' )
