@@ -3,7 +3,7 @@
 /**
  * WPS Core Extend Class
  *
- * @package    WPS\Core
+ * @package    WPS\Plugins
  * @author     Travis Smith <t@wpsmith.net>
  * @copyright  2015-2018 WP Smith, Travis Smith
  * @link       https://github.com/wpsmith/WPS/
@@ -12,7 +12,7 @@
  * @since      0.1.0
  */
 
-namespace WPS\Core;
+namespace WPS\Plugins;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
