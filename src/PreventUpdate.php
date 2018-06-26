@@ -49,6 +49,8 @@ if ( ! class_exists( 'WPS\Plugin\PreventUpdate' ) ) {
 		public function __construct( $plugin_basename ) {
 			$this->plugin = $plugin_basename;
 			add_action( 'http_request_args', array( $this, 'http_request_args' ), 5, 2 );
+			add_filter( 'site_transient_update_plugins', array( $this, 'disable_plugin_updates' ) );
+
 		}
 
 		/**
@@ -72,6 +74,23 @@ if ( ! class_exists( 'WPS\Plugin\PreventUpdate' ) ) {
 			$r['body']['plugins'] = serialize( $plugins );
 
 			return $r;
+		}
+
+		/**
+		 * Disables plugin notifications.
+		 *
+		 * @param string $value Plugin basename.
+		 *
+		 * @return mixed
+		 */
+		public function disable_plugin_updates( $value ) {
+			if ( isset( $value ) && is_object( $value ) ) {
+				if ( isset( $value->response[ $this->plugin ] ) ) {
+					unset( $value->response[ $this->plugin ] );
+				}
+			}
+
+			return $value;
 		}
 	}
 }
