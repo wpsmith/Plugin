@@ -1,6 +1,6 @@
 <?php
 
-namespace WPS\Plugins;
+namespace WPS\Plugin;
 
 /**
  * Check whether a plugin is active.

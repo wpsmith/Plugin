@@ -3,7 +3,7 @@
 /**
  * WPS Core Hide Plugin Class
  *
- * @package    WPS\Plugins
+ * @package    WPS\Plugin
  * @author     Travis Smith <t@wpsmith.net>
  * @copyright  2015-2018 WP Smith, Travis Smith
  * @link       https://github.com/wpsmith/WPS/
@@ -12,7 +12,7 @@
  * @since      0.1.0
  */
 
-namespace WPS\Plugins;
+namespace WPS\Plugin;
 
 
 // Exit if accessed directly
@@ -20,13 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'HidePlugin' ) ) {
+if ( ! class_exists( 'WPS\Plugin\HidePlugin' ) ) {
 	/**
 	 * Hide Plugin Class
 	 *
 	 * Assists in hiding various plugins from the plugins admin page.
 	 *
-	 * @package WPS\Plugins
+	 * @package WPS\Plugin
 	 * @author Travis Smith <t@wpsmith.net>
 	 */
 	class HidePlugin {

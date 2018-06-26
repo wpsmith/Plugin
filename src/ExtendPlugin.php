@@ -1,9 +1,9 @@
 <?php
 
 /**
- * WPS Core Extend Class
+ * WPS Plugin Extend Class
  *
- * @package    WPS\Plugins
+ * @package    WPS\Plugin
  * @author     Travis Smith <t@wpsmith.net>
  * @copyright  2015-2018 WP Smith, Travis Smith
  * @link       https://github.com/wpsmith/WPS/
@@ -12,20 +12,20 @@
  * @since      0.1.0
  */
 
-namespace WPS\Plugins;
+namespace WPS\Plugin;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'ExtendPlugin' ) ) {
+if ( ! class_exists( 'WPS\Plugin\ExtendPlugin' ) ) {
 	/**
 	 * Extend Plugin Class
 	 *
 	 * Assists in properly extending an existing plugin.
 	 *
-	 * @package WPS\Core
+	 * @package WPS\Plugin
 	 * @author Travis Smith <t@wpsmith.net>
 	 */
 	class ExtendPlugin {

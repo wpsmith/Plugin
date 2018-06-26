@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "WPS\\Plugins\\": "src/"
+      "WPS\\Plugin\\": "src/"
     },
     "files": [
       "src/helpers.php"
