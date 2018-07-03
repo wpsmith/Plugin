@@ -79,7 +79,7 @@ if ( ! class_exists( 'WPS\Plugin\PreventUpdate' ) ) {
 		/**
 		 * Disables plugin notifications.
 		 *
-		 * @param string $value Plugin basename.
+		 * @param \stdClass $value Plugin basename.
 		 *
 		 * @return mixed
 		 */
