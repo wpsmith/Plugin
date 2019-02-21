@@ -12,7 +12,7 @@
  * @since      0.1.0
  */
 
-namespace WPS\Plugin;
+namespace WPS\WP\Plugin;
 
 
 // Exit if accessed directly
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Plugin\PreventUpdate' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\PreventUpdate' ) ) {
 	/**
 	 * Prevent Update Plugin Class
 	 *

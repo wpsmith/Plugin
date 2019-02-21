@@ -8,7 +8,7 @@
     {
       "name"    : "Travis Smith",
       "email"   : "t@wpsmith.net",
-      "homepage": "http://wpsmith.net/",
+      "homepage": "https://wpsmith.net/",
       "role"    : "Developer"
     }
   ],
@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "WPS\\Plugin\\": "src/"
+      "WPS\\WP\\Plugin\\": "src/"
     },
     "files": [
       "src/helpers.php"

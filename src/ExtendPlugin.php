@@ -12,14 +12,14 @@
  * @since      0.1.0
  */
 
-namespace WPS\Plugin;
+namespace WPS\WP\Plugin;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPS\Plugin\ExtendPlugin' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\ExtendPlugin' ) ) {
 	/**
 	 * Extend Plugin Class
 	 *
@@ -85,8 +85,6 @@ if ( ! class_exists( 'WPS\Plugin\ExtendPlugin' ) ) {
 		 * @var string
 		 */
 		private $transient = '';
-
-		private $mu_plugins_dir = '';
 
 		/**
 		 * Mu Plugins
@@ -281,12 +279,8 @@ if ( ! class_exists( 'WPS\Plugin\ExtendPlugin' ) ) {
 		}
 
 		public function recently_activated( $value, $old_value ) {
-//$this->pr( $old_value, '$old_value' );
-//$this->pr( $value, '$value' );
 			$current = array_diff_key( $value, $old_value );
-//$this->pr( $current, '$current' );
-//wp_die();
-			// Check if our plugin was just now deactivated
+			// Check if our plugin was just now deactivated.
 			if ( isset( $current[ $this->plugin ] ) ) {
 				$this->set_transient( 'was_active', 1 );
 			}
