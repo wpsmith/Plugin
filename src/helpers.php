@@ -2,7 +2,7 @@
 
 namespace WPS;
 
-if ( ! function_exists( 'is_plugin_active' ) ) {
+if ( ! function_exists( __NAMESPACE__ . '\is_plugin_active' ) ) {
 	/**
 	 * Check whether a plugin is active.
 	 *
