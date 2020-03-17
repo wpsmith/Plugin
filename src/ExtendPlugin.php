@@ -406,7 +406,7 @@ if ( ! class_exists( __NAMESPACE__ . '\ExtendPlugin' ) ) {
 		 *
 		 * @uses deactivate_plugins Deactivate a single plugin or multiple plugins.
 		 *
-		 * @param string $file Single plugin or list of plugins to deactivate.
+		 * @param string $file File path (e.g., __FILE__).
 		 * @param mixed $network_wide Whether to deactivate the plugin for all sites in the network.
 		 *                             A value of null (the default) will deactivate plugins for both the site and the
 		 *                             network.
@@ -449,6 +449,7 @@ if ( ! class_exists( __NAMESPACE__ . '\ExtendPlugin' ) ) {
 //			if ( $active ) {
 //				$this->delete_transient( 'was_active' );
 //			}
+
 			// All Good!
 			return $active;
 		}
