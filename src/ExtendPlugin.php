@@ -3,7 +3,7 @@
 /**
  * WPS Plugin Extend Class
  *
- * @package    WPS\Plugin
+ * @package    WPS\WP\Plugin
  * @author     Travis Smith <t@wpsmith.net>
  * @copyright  2015-2018 WP Smith, Travis Smith
  * @link       https://github.com/wpsmith/WPS/
@@ -25,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\ExtendPlugin' ) ) {
 	 *
 	 * Assists in properly extending an existing plugin.
 	 *
-	 * @package WPS\Plugin
+	 * @package WPS\WP\Plugin
 	 * @author Travis Smith <t@wpsmith.net>
 	 */
 	class ExtendPlugin {
