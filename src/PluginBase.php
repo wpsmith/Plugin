@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( __NAMESPACE__ . '\Plugin' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 	/**
 	 * Extend Plugin Class
 	 *
@@ -31,7 +31,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin' ) ) {
 	 * @package WPS\WP\Plugin
 	 * @author Travis Smith <t@wpsmith.net>
 	 */
-	abstract class Plugin extends Singleton {
+	abstract class PluginBase extends Singleton {
 
 		/**
 		 * The unique identifier of this plugin.
