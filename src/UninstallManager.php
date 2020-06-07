@@ -52,13 +52,13 @@ if ( ! class_exists( __NAMESPACE__ . '\UninstallManager' ) ) {
 		/**
 		 * DataManager constructor.
 		 *
-		 * @param string $plugin_file Plugin file.
-		 * @param string $plugin_slug Plugin slug.
+		 * @param string $plugin_filepath Absolute path to plugin base file.
 		 */
-		public function __construct( $plugin_file, $plugin_slug ) {
+		public function __construct( $plugin_filepath ) {
 
-			$this->plugin_file = $plugin_file;
-			$this->plugin_slug = sanitize_title_with_dashes( $plugin_slug );
+			$this->plugin_file = plugin_basename( $plugin_filepath );
+			$plugin_data       = get_plugin_data( $plugin_filepath, false, false );
+			$this->plugin_slug = sanitize_title_with_dashes( $plugin_data['Name'] );
 
 			add_action( 'admin_footer', array( $this, 'delete_data_or_plugin' ) );
 
