@@ -66,20 +66,27 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		/**
 		 * Plugin constructor.
 		 *
-		 * @param array $args Optional args.
+		 * @param array $args {
+		 *      Optional args.
+		 *
+		 *      @type string $name Plugin slug.
+		 *      @type string $version Plugin semantic version.
+		 *      @type string $file Plugin absolute file path.
+		 *      @type string $directory Plugin directory. Defaults to `dirname( $file )`.
+		 * }
 		 *
 		 * @since 0.0.1
 		 */
 		protected function __construct( $args = array() ) {
 			// Do i18n.
-			add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
+			$this->add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 
 			// Parse the args.
 			$args = wp_parse_args( $args, array(
 				'name'      => 'wps',
-				'version'   => '',
-				'file'      => '',
-				'directory' => '',
+				'version'   => '0.0.0',
+				'file'      => __FILE__,
+				'directory' => dirname( __FILE__ ),
 			) );
 
 			// Set parameters.
@@ -160,5 +167,30 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 			return $this->template_loader;
 		}
 
+		/**
+		 * Hooks a function on to a specific action.
+		 *
+		 * Actions are the hooks that the WordPress core launches at specific points
+		 * during execution, or when specific events occur. Plugins can specify that
+		 * one or more of its PHP functions are executed at these points, using the
+		 * Action API.
+		 *
+		 * @param string   $tag The name of the action to which the $function_to_add is hooked.
+		 * @param callable $function_to_add The name of the function you wish to be called.
+		 * @param int      $priority Optional. Used to specify the order in which the functions
+		 *                                  associated with a particular action are executed. Default 10.
+		 *                                  Lower numbers correspond with earlier execution,
+		 *                                  and functions with the same priority are executed
+		 *                                  in the order in which they were added to the action.
+		 * @param int      $accepted_args Optional. The number of arguments the function accepts. Default 1.
+		 * @param array    $args Args to pass to the function.
+		 */
+		public function add_action( $tag, $function_to_add, $priority = 10, $accepted_args = 1, $args = array() ) {
+			if ( did_action( $tag ) || doing_action( $tag ) ) {
+				call_user_func_array( $function_to_add, (array) $args );
+			} else {
+				add_action( $tag, $function_to_add, $priority, $accepted_args );
+			}
+		}
 	}
 }
