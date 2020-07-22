@@ -33,21 +33,21 @@ if ( ! class_exists( __NAMESPACE__ . '\UninstallManager' ) ) {
 		 *
 		 * @var string
 		 */
-		protected string $plugin_slug;
+		protected $plugin_slug;
 
 		/**
 		 * Plugin basename.
 		 *
 		 * @var string
 		 */
-		protected string $plugin_file;
+		protected $plugin_file;
 
 		/**
 		 * Default delete action is to remove plugin only.
 		 *
 		 * @var string
 		 */
-		public static string $default_delete_action = 'plugin-only';
+		public static $default_delete_action = 'plugin-only';
 
 		/**
 		 * DataManager constructor.
