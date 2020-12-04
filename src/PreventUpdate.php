@@ -1,7 +1,7 @@
 <?php
 
 /**
- * WPS Core Hide Plugin Class
+ * WPS Prevent Update Plugin Class
  *
  * @package    WPS\WP\Plugins
  * @author     Travis Smith <t@wpsmith.net>
