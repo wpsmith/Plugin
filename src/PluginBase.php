@@ -190,7 +190,7 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 *
 		 * @return Templates\FileLoader|Templates\TemplateLoader|Templates\ConfigLoader
 		 */
-		protected function get_loader( string $loader = 'templates' ): Templates\TemplateLoader|Templates\FileLoader|Templates\ConfigLoader {
+		protected function get_loader( string $loader = 'templates' ) {
 			if ( isset( $this->loaders[ $loader ] ) ) {
 				return $this->loaders[ $loader ];
 			}
