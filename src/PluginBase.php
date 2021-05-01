@@ -143,8 +143,8 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 *
 		 * @return string The name of the plugin.
 		 */
-		public static function get_plugin_name(): string {
-			return self::get_instance()->plugin_name;
+		public function get_plugin_name(): string {
+			return $this->plugin_name;
 		}
 
 		/**
@@ -152,8 +152,8 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 *
 		 * @return string The version number of the plugin.
 		 */
-		public static function get_version(): string {
-			return self::get_instance()->version;
+		public function get_version(): string {
+			return $this->version;
 		}
 
 		/**
