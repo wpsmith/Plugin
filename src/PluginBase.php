@@ -33,10 +33,10 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 	abstract class PluginBase extends Singleton {
 
 		/**
-		 * The unique identifier of this plugin.
+		 * The version of this plugin.
 		 *
 		 * @access protected
-		 * @var    string $plugin_name The string used to uniquely identify this plugin.
+		 * @var    string $version The version.
 		 */
 		protected string $version = '0.0.0';
 
@@ -88,7 +88,7 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 * @formatter:on
 		 */
 		protected function __construct( $args = array() ) {
-			$this->plugin_directory = dirname( $this->file );
+			$this->plugin_directory = $this->plugin_directory ? $this->plugin_directory : ( $this->file ? dirname( $this->file ) : dirname( __FILE__ ) );
 
 			// Do i18n.
 			$this->add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
