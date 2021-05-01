@@ -43,7 +43,7 @@ if ( ! function_exists( __NAMESPACE__ . '\extend_plugins' ) ) {
 	 */
 	function extend_plugins( array $plugins, string $file, string $text_domain = 'wps' ) {
 		foreach ( $plugins as $plugin => $version ) {
-			extend_plugin( $plugin, $file, $version, $text_domain );
+			new Plugin\ExtendPlugin( $plugin, $file, $version, $text_domain );
 		}
 	}
 }
@@ -77,7 +77,7 @@ if ( ! function_exists( __NAMESPACE__ . '\hide_plugins' ) ) {
 	 */
 	function hide_plugins( array $plugins ) {
 		foreach ( $plugins as $plugin ) {
-			hide_plugin( $plugin );
+			new Plugin\HidePlugin( $plugin );
 		}
 	}
 }
@@ -118,7 +118,7 @@ if ( ! function_exists( __NAMESPACE__ . '\prevent_plugin_update' ) ) {
 	 *
 	 * @param string $plugin_basename Plugin basename (e.g., 'plugin_path/plugin_root_file.php').
 	 */
-	function prevent_plugin_updates( string $plugin_basename ) {
+	function prevent_plugin_update( string $plugin_basename ) {
 		new Plugin\PreventUpdate( $plugin_basename );
 	}
 }
