@@ -6,7 +6,7 @@
  * @package    WPS\WP\Plugin
  * @author     Travis Smith <t@wpsmith.net>
  * @copyright  2015-2018 WP Smith, Travis Smith
- * @link       https://github.com/wpsmith/WPS/
+ * @link       https://wpsmith.net/
  * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @version    1.0.0
  * @since      0.1.0
@@ -29,6 +29,12 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 	 * Assists in properly extending an existing plugin.
 	 *
 	 * @package WPS\WP\Plugin
+	 *
+	 * @property $version Plugin version.
+	 * @property $plugin_name Plugin name.
+	 * @property $plugin_file Plugin file.
+	 * @property $plugin_directory Plugin directory.
+	 * @property $suffix Script/Style suffix.
 	 */
 	abstract class PluginBase extends Singleton {
 
@@ -49,6 +55,14 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		protected string $plugin_name = 'wps';
 
 		/**
+		 * The __FILE__ of the plugin.
+		 *
+		 * @access protected
+		 * @var    string $plugin_file The file path of the plugin.
+		 */
+		protected string $plugin_file = __FILE__;
+
+		/**
 		 * Template Loaders.
 		 *
 		 * @access protected
@@ -65,12 +79,11 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		protected string $plugin_directory;
 
 		/**
-		 * __FILE__ of the root plugin.
+		 * The suffix.
 		 *
-		 * @access protected
 		 * @var string
 		 */
-		protected string $file = __FILE__;
+		public string $suffix = '';
 
 		/**
 		 * Plugin constructor.
@@ -88,29 +101,30 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 * @formatter:on
 		 */
 		protected function __construct( $args = array() ) {
-			$this->plugin_directory = $this->plugin_directory ? $this->plugin_directory : ( $this->file ? dirname( $this->file ) : dirname( __FILE__ ) );
+			// Parse the args.
+			$args = wp_parse_args( $args, array(
+				'name'      => $this->plugin_name,
+				'version'   => $this->version,
+				'file'      => $this->plugin_file,
+				'directory' => '' !== $args['directory'] ? $args['directory'] : ( '' !== $args['file'] ? dirname( $args['file'] ) : dirname( __FILE__ ) ),
+			) );
+
+			// Set parameters.
+			$this->version          = $args['version'];
+			$this->plugin_name      = $args['name'];
+			$this->plugin_file      = $args['file'];
+			$this->plugin_directory = $args['directory'];
+
+			$this->suffix = wp_scripts_get_suffix();
+
+			// Construct the parent.
+			parent::__construct( $args );
 
 			// Do i18n.
 			$this->add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 			if ( method_exists( $this, 'plugins_loaded' ) ) {
 				$this->add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 			}
-
-			// Parse the args.
-			$args = wp_parse_args( $args, array(
-				'name'      => $this->plugin_name,
-				'version'   => $this->version,
-				'file'      => $this->file,
-				'directory' => $this->plugin_directory,
-			) );
-
-			// Set parameters.
-			$this->version          = $args['version'];
-			$this->plugin_name      = $args['name'];
-			$this->plugin_directory = '' !== $args['directory'] ? $args['directory'] : ( '' !== $args['file'] ? dirname( $args['file'] ) : dirname( __FILE__ ) );
-
-			// Construct the parent.
-			parent::__construct( $args );
 		}
 
 		/**
@@ -154,6 +168,44 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 */
 		public function get_version(): string {
 			return $this->version;
+		}
+
+		/**
+		 * Setter for version, plugin_name and plugin_directory properties.
+		 *
+		 * @param string $property Property to set.
+		 * @param string $value Property value.
+		 */
+		public function __set( string $property, string $value ) {
+			switch ( $property ) {
+				case "version":
+				case "plugin_name":
+				case "plugin_directory":
+				case "plugin_file":
+					$this->$property = $value;
+			}
+		}
+
+		/**
+		 * Getter for version, plugin_name and plugin_directory properties.
+		 *
+		 * @param string $property Property to set.
+		 * @param string $value Property value.
+		 */
+		public function __get( string $property ) {
+			switch ( $property ) {
+				case "version":
+				case "plugin_name":
+				case "plugin_directory":
+				case "plugin_file":
+					return $this->$property;
+				case "name":
+					return $this->plugin_name;
+				case "directory":
+					return $this->plugin_directory;
+				case "file":
+					return $this->plugin_file;
+			}
 		}
 
 		/**
@@ -226,11 +278,11 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 *
 		 * @return array
 		 */
-		protected function get_loader_args( string $templates_directory = 'templates' ) {
+		protected function get_loader_args( string $files_directory = 'templates' ) {
 			return [
-				'filter_prefix'       => $this->plugin_name,
-				'plugin_directory'    => $this->plugin_directory,
-				'templates_directory' => $templates_directory,
+				'filter_prefix'    => $this->plugin_name,
+				'plugin_directory' => $this->plugin_directory,
+				'files_directory'  => $files_directory,
 			];
 		}
 
