@@ -1,22 +1,30 @@
 {
-  "name"       : "wpsmith/plugin",
+  "name": "wpsmith/plugin",
   "description": "Core class for extending WordPress plugins and hiding WordPress plugins on the plugins page.",
-  "keywords"   : ["wordpress", "plugin", "dependency", "extension", "extension"],
-  "homepage"   : "https://github.com/wpsmith/Plugin",
-  "license"    : "GPL-2.0+",
-  "authors"    : [
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "dependency",
+    "extension",
+    "extension"
+  ],
+  "homepage": "https://github.com/wpsmith/Plugin",
+  "license": "GPL-2.0+",
+  "type": "library",
+  "authors": [
     {
-      "name"    : "Travis Smith",
-      "email"   : "t@wpsmith.net",
+      "name": "Travis Smith",
+      "email": "t@wpsmith.net",
       "homepage": "https://wpsmith.net/",
-      "role"    : "Developer"
+      "role": "Developer"
     }
   ],
-  "support"    : {
+  "support": {
     "issues": "https://github.com/wpsmith/Plugin/issues"
   },
-  "require"    : {
-    "php": ">=5.2.4"
+  "require": {
+    "php": ">=7.4.0",
+    "wpsmith/templates": "dev-master"
   },
   "autoload": {
     "psr-4": {
