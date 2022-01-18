@@ -466,7 +466,12 @@ if ( ! class_exists( __NAMESPACE__ . '\ExtendPlugin' ) ) {
 
 			$version = floatval( $this->min_version );
 
-			return ( floatval( $this->get_plugin_data( 'Version' ) ) >= $version || ( isset( $this->mu[ $this->plugin ] ) && $this->mu[ $this->plugin ]["Version"] >= $version ) );
+			$actual_plugin_version = $this->get_plugin_data( 'Version' );
+			return (
+				floatval( $actual_plugin_version ) >= $version ||
+				( isset( $this->mu[ $this->plugin ] ) && $this->mu[ $this->plugin ]["Version"] >= $version ) ||
+				version_compare( $version, $actual_plugin_version ) <= 0
+			);
 		}
 
 		/**
