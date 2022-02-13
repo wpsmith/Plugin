@@ -68,7 +68,7 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 * @access protected
 		 * @var    Templates\TemplateLoader[]
 		 */
-		protected array $loaders;
+		protected array $loaders = [];
 
 		/**
 		 * Plugin directory.
@@ -76,7 +76,7 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 		 * @access protected
 		 * @var    string
 		 */
-		protected string $plugin_directory;
+		protected string $plugin_directory = '';
 
 		/**
 		 * The suffix.
@@ -106,7 +106,7 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 				'name'      => $this->plugin_name,
 				'version'   => $this->version,
 				'file'      => $this->plugin_file,
-				'directory' => '' !== $args['directory'] ? $args['directory'] : ( '' !== $args['file'] ? dirname( $args['file'] ) : dirname( __FILE__ ) ),
+				'directory' => $this->get_directory_default( $args ),
 			) );
 
 			// Set parameters.
@@ -124,6 +124,31 @@ if ( ! class_exists( __NAMESPACE__ . '\PluginBase' ) ) {
 			$this->add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 			if ( method_exists( $this, 'plugins_loaded' ) ) {
 				$this->add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
+			}
+		}
+
+		/**
+		 * Gets directory value from args.
+		 *
+		 * @access protected
+		 * @formatter:off
+		 * @param  array $args {
+		 *      Optional args.
+		 *
+		 *      @type string $name Plugin slug.
+		 *      @type string $version Plugin semantic version.
+		 *      @type string $file Plugin absolute file path.
+		 *      @type string $directory Plugin directory. Defaults to `dirname( $file )`.
+		 * }
+		 * @formatter:on
+		 */
+		protected function get_directory_default( $args ) {
+			if ( isset( $args['directory'] ) && '' !== $args['directory'] ) {
+				return $args['directory'];
+			} elseif ( isset( $args['file'] ) && '' !== $args['file'] ) {
+				return dirname( $args['file'] );
+			} else {
+				return dirname( __FILE__ );
 			}
 		}
 
